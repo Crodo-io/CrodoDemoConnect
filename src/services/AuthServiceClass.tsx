@@ -77,7 +77,7 @@ class AuthServiceClass {
         }
     }
 
-    addAuth = async (signature: string) => {
+    addAuth = async (_signature: string) => {
         ConnectStore.handleSetConnectingProgress('add_auth');
         //ToDo: Request to backend
         /*
@@ -86,7 +86,7 @@ class AuthServiceClass {
             headers: this.getHeaders(),
             body: JSON.stringify({
                 address: ConnectStore.address,
-                signature: signature,
+                signature: _signature,
             })
         };
         let response = await fetch(process.env.REACT_APP_API_URL + '/auth/login', requestOptions);
@@ -129,10 +129,10 @@ class AuthServiceClass {
     }
 
     getRefreshToken() {
-        return (localStorage.getItem('refresh_token_' + ConnectStore.address) ? localStorage.getItem('refresh_token_' + ConnectStore.address) : '');
+        return (localStorage.getItem('refresh_token_' + ConnectStore.address) ?? '');
     }
     getAccessToken() {
-        return (localStorage.getItem('access_token_' + ConnectStore.address) ? localStorage.getItem('access_token_' + ConnectStore.address) : '');
+        return (localStorage.getItem('access_token_' + ConnectStore.address) ?? '');
     }
 
     setRefreshToken(value: string) {
